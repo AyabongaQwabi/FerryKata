@@ -22,4 +22,11 @@ venture.prototype.getPassengerNum = function(){
 	return this.passengers.length;
 }
 
+venture.prototype.getPassengers = function(){
+	return this.passengers;
+}
+
+venture.prototype.getCar = function(){
+	return this.car;
+}
 module.exports = venture;

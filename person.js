@@ -1,5 +1,5 @@
-function person(){
-	this.name = '';
+function person(name){
+	this.name = name||'';
 	this.birthYear = 0;
 	this.age=0;
 }
