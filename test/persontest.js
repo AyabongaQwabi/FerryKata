@@ -90,10 +90,11 @@ describe('Car', function() {
 describe('venture', function() {
   describe('addPassenger', function () {
     it('should add passenger to venture', function () {
+    	var qwabiFamily = new venture('Qwabi Family vacation');
     	var familyMember1 = new traveller('steve gerrad')
     	var familyMember2 = new traveller('qwabi gerrad')
 
-    	var qwabiFamily = new venture('Qwabi Family vacation');
+    	
     	qwabiFamily.car = new car('Mercedes','Jc101','93GH5678EC',2)
     	qwabiFamily.addPassenger(familyMember1)
     	qwabiFamily.addPassenger(familyMember2)
@@ -103,10 +104,11 @@ describe('venture', function() {
   });
   describe('isFull', function () {
     it('should return boolean of wether car is full or not', function () {
+    	var qwabiFamily = new venture('Qwabi Family vacation');
     	var familyMember1 = new traveller('steve gerrad')
     	var familyMember2 = new traveller('qwabi gerrad')
 
-    	var qwabiFamily = new venture('Qwabi Family vacation');
+    	
     	qwabiFamily.car = new car('Mercedes','Jc101','93GH5678EC',2)
     	qwabiFamily.addPassenger(familyMember1)
     	qwabiFamily.addPassenger(familyMember2)
@@ -116,10 +118,11 @@ describe('venture', function() {
   });
   describe('getNumPassengers', function () {
     it('should return number of passenger', function () {
+    	var qwabiFamily = new venture('Qwabi Family vacation');
     	var familyMember1 = new traveller('steve gerrad')
     	var familyMember2 = new traveller('qwabi gerrad')
 
-    	var qwabiFamily = new venture('Qwabi Family vacation');
+    	
     	qwabiFamily.car = new car('Mercedes','Jc101','93GH5678EC',2)
     	qwabiFamily.addPassenger(familyMember1)
     	qwabiFamily.addPassenger(familyMember2)
