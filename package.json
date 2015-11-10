@@ -1,0 +1,24 @@
+{
+  "name": "FerryKata",
+  "version": "0.0.0",
+  "description": "## Instructions",
+  "main": "car.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AyabongaQwabi/FerryKata.git"
+  },
+  "author": "aya",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/AyabongaQwabi/FerryKata/issues"
+  },
+  "dependencies": {
+    "mocha": "~2.3.3"
+  }
+}
