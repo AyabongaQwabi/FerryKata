@@ -1,5 +1,5 @@
 # Ferry Kata
-
+https://travis-ci.org/AyabongaQwabi/FerryKata.svg?branch=develop
 ## Instructions
 
 Solve the Kata below using TDD. Complete it in Javascript, Python, or Ruby. Once done in one Language in the alotted time try it out in another. Use flowcharts and diagrams to think through the required logic.
