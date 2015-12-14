@@ -1,4 +1,5 @@
-function trip(dest,people,vehicles){
+var _ = require('lodash')
+function trip(dest,people,vehicles,price){
 	this.departue='central city';
 	this.destination=dest||'';
 	this.passengers=[];
@@ -6,7 +7,8 @@ function trip(dest,people,vehicles){
 	this.timeOfTravel=''
 	this.carSpaces=vehicles||0;
 	this.passengerSpaces=people||0;
-	this.cost=0;
+	this.price = price || 100;
+	this.code =this.departue.substring(0,2)+'-'+this.destination.substring(0,2)
 
 }
 
@@ -21,11 +23,24 @@ trip.prototype.addPassenger = function(human){
 	
 }
 trip.prototype.addCar = function(car){
-	if(!this.CarSpaceFull()){
-		this.cars.push(car)
-		return true;
+	
+	if(!this.CarSpaceFull()){		
+		if(_.countBy(car.getTripArchive(), function(n){return n})[this.code] == 3){			
+			car.bill({tripcode:this.code,price:(this.price/2)})
+			car.setOnTrip(this.code)
+			this.cars.push(car)
+			console.log(this.cars)
+			return true;
+		}
+		else{			
+			car.bill({tripcode:this.code,price:this.price})
+			car.setOnTrip(this.code)
+			this.cars.push(car)
+			return true;
+		}
+		
 	}
-	else{
+	else{		
 		return false;
 	}
 	
@@ -52,6 +67,12 @@ trip.prototype.addVenture = function(venture){
 }
 trip.prototype.getDestination = function(){
 	return this.destination;
+}
+trip.prototype.getCars = function(){
+	return this.cars;
+}
+trip.prototype.setprice = function(price){
+	this.price = price;
 }
 trip.prototype.isFull =function(){
 	return this.passengerSpaces == this.passengers.length

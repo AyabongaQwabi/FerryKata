@@ -3,7 +3,8 @@ function car(brand,model,registrationNum,seats){
 	this.brand = brand || 0;
 	this.seats = seats || 0;
 	this.registrationNum = registrationNum || '';
-
+	this.tripArchive =[];
+	this.bills = [];
 }
 
 car.prototype.getModel =function(){
@@ -22,5 +23,37 @@ car.prototype.getSeats =function(){
 car.prototype.getRegnumber = function(){
 	return this.registrationNum;
 }
-
+car.prototype.bill = function(bill){
+	this.bills.push(bill);
+}
+car.prototype.payBill = function(trip){	
+	
+	var billIndex;	
+	for(var i=0;i<this.bills.length;i++){
+		var bill = this.bills[i];		
+		if(bill.tripcode == trip.tripcode){
+				billIndex = i;				
+				break;
+			}
+	}	
+	
+	if(billIndex != undefined){
+		this.bills[billIndex].price -= trip.price		
+		if(this.bills[billIndex].price==0){			
+			this.bills.splice(billIndex,billIndex+1)			
+		}		
+		return true; 
+	}
+	else{
+		return false;
+	}
+	
+	
+}
+car.prototype.setOnTrip = function(tripcode){
+	this.tripArchive.push(tripcode);
+}
+car.prototype.getTripArchive = function(){
+	return this.tripArchive;
+}
 module.exports = car;
