@@ -24,13 +24,20 @@ trip.prototype.addPassenger = function(human){
 }
 trip.prototype.addCar = function(car){
 	
-	if(!this.CarSpaceFull()){		
+	if(!this.CarSpaceFull()){	
+		
 		if(_.countBy(car.getTripArchive(), function(n){return n})[this.code] == 3){			
 			car.bill({tripcode:this.code,price:(this.price/2)})
 			car.setOnTrip(this.code)
-			this.cars.push(car)
-			console.log(this.cars)
-			return true;
+			this.cars.push(car)			
+			return 'Half Price!';
+		}
+		else if(_.countBy(car.getTripArchive(), function(n){return n})[this.code] == 7){
+			car.bill({tripcode:this.code,price:0})
+			car.setOnTrip(this.code)
+			this.cars.push(car)			
+			return 'You Go Free!';
+
 		}
 		else{			
 			car.bill({tripcode:this.code,price:this.price})
@@ -40,7 +47,8 @@ trip.prototype.addCar = function(car){
 		}
 		
 	}
-	else{		
+	else{
+			
 		return false;
 	}
 	
@@ -48,14 +56,14 @@ trip.prototype.addCar = function(car){
 trip.prototype.addVenture = function(venture){
 	if(!this.isFull() && !this.CarSpaceFull()){
 		var self=this;
-		this.addCar(venture.getCar())
+		
 		venture.getPassengers().forEach(function(passenger){
 			if(!self.addPassenger(passenger)){
 				
 				throw new Error('Venture Passengers too many .Exceed passenger space left.');
 			}
 		})
-		return true;
+		return this.addCar(venture.getCar());
 
 
 	}
@@ -70,6 +78,21 @@ trip.prototype.getDestination = function(){
 }
 trip.prototype.getCars = function(){
 	return this.cars;
+}
+trip.prototype.getCarsByColors = function(){
+	var carsByColor={}
+	this.cars.forEach(function(car){
+			if(carsByColor[car.getColor()]==undefined){
+				carsByColor[car.getColor()]={};
+				carsByColor[car.getColor()]['count']=1
+				carsByColor[car.getColor()]['cars']=[car]
+			}
+			else{
+				carsByColor[car.getColor()]['count']+=1;
+				carsByColor[car.getColor()]['cars'].push(car)
+			}
+	})
+	return carsByColor;
 }
 trip.prototype.setprice = function(price){
 	this.price = price;

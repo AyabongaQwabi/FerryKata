@@ -5,6 +5,7 @@ function car(brand,model,registrationNum,seats){
 	this.registrationNum = registrationNum || '';
 	this.tripArchive =[];
 	this.bills = [];
+	this.color='grey';
 }
 
 car.prototype.getModel =function(){
@@ -14,11 +15,17 @@ car.prototype.getModel =function(){
 car.prototype.setModel =function(model){
 	this.model=model;
 }
+car.prototype.setColor =function(color){
+	this.color=color;
+}
 car.prototype.setSeats =function(seats){
 	this.seats=seats;
 }
 car.prototype.getSeats =function(){
 	return this.seats;
+}
+car.prototype.getColor =function(){
+	return this.color;
 }
 car.prototype.getRegnumber = function(){
 	return this.registrationNum;

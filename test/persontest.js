@@ -216,4 +216,78 @@ describe('FerryTrip', function() {
      
     });})
 
+ describe('getCarsByColors', function () {
+    it('should return cars on borad by colors', function () {
+        var MazwiFamily = new venture('Qwabi Family vacation');
+        var MazwiFamilyMember1 = new traveller('Mandla Mazwi')
+        var MazwiFamilyMember2 = new traveller('Noluvo Mazwi') 
+        var MazwiFamilyMember3 = new traveller('Jony Jr Mazwi') 
+        MazwiFamily.car = new car('BMW','X5','11O3RY3FWC',4)
+        MazwiFamily.car.setColor('Black')
+        MazwiFamily.addPassenger(MazwiFamilyMember1)
+        MazwiFamily.addPassenger(MazwiFamilyMember2)
+        MazwiFamily.addPassenger(MazwiFamilyMember3)
+        
+
+
+        var qwabiFamily = new venture('Qwabi Family vacation');
+        var familyMember1 = new traveller('steve gerrad')
+        var familyMember2 = new traveller('qwabi gerrad') 
+        qwabiFamily.car = new car('Mercedes','Jc101','93GH5678EC',2)
+        qwabiFamily.car.setColor('Silver')
+        qwabiFamily.addPassenger(familyMember1)
+        qwabiFamily.addPassenger(familyMember2)
+
+
+        var greyHound = new FerryTrip('st Lucia Wetlands Parks',8,3)
+        greyHound.addVenture(MazwiFamily)
+        greyHound.addVenture(MazwiFamily)
+        greyHound.addVenture(qwabiFamily)
+
+
+        assert.equal(1,greyHound.getCarsByColors()['Silver'].count);
+        assert.equal(2,greyHound.getCarsByColors()['Black'].count);
+     
+     
+    });})
+
+describe('addCar - Billing', function () {
+    it('should bill give 50% price after third ride', function () {
+
+        var MazwiFamily = new venture('Qwabi Family vacation');        
+        MazwiFamily.car = new car('BMW','X5','11O3RY3FWC',4)
+        MazwiFamily.car.setColor('Black')
+        var greyHound = new FerryTrip('st Lucia Wetlands Parks',9,14)
+        greyHound.addVenture(MazwiFamily)
+        greyHound.addVenture(MazwiFamily)
+        greyHound.addVenture(MazwiFamily)
+        assert.equal('Half Price!',greyHound.addVenture(MazwiFamily));
+    })
+
+    it('should give free ride after 7 rides', function () {
+
+
+        var qwabiFamily = new venture('Qwabi Family vacation');
+        qwabiFamily.car = new car('Mercedes','Jc101','93GH5678EC',2)
+        qwabiFamily.car.setColor('Silver')
+        var greyHound = new FerryTrip('st Lucia Wetlands Parks',9,14)
+        
+        greyHound.addVenture(qwabiFamily)
+        greyHound.addVenture(qwabiFamily)
+        greyHound.addVenture(qwabiFamily)
+        greyHound.addVenture(qwabiFamily)
+        greyHound.addVenture(qwabiFamily)
+        greyHound.addVenture(qwabiFamily)
+        greyHound.addVenture(qwabiFamily)
+      
+        assert.equal('You Go Free!', greyHound.addVenture(qwabiFamily));
+        
+     
+     
+    })
+
+
+;})
+
+
 });
